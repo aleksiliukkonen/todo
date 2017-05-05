@@ -7,14 +7,55 @@
 
     <body>
         <h1>Section 2: JavaScript Language Basics</h1>
+
+        <input type="text" name="FirstName" placeholder="task" id="textbox">
+        <button id="add">Add task</button>
+
+        <ul id="todoList">
+
+
+        </ul>
+
     </body>
 
     <script>
 
-    for (var i = 0; i < 10; i++) {
-        console.log(i);
+    const todos = [ 
+      { 
+        title: 'Go to gym',  
+        completed: true 
+      }, 
+      { 
+        title: 'Wash clothes', 
+        completed: false 
+      }, 
+      { 
+        title: 'Play L4D2', 
+        completed: false 
+      } 
+    ];
+
+    document.querySelector('#add').addEventListener('click', paska);
+
+    function paska() {
+      var input = document.querySelector('#textbox').value
+      todos.push({title: input, completed: false})
     }
 
-    </script
+    todos.forEach(function(task) {
+      var li = document.createElement("LI");
+      var t = document.createTextNode(task.title);
+      li.appendChild(t);
+      document.querySelector("#todoList").appendChild(li);
+    });
+
+    
+    const completed = todos.filter(function(task) {
+      return task.completed === true;
+    });
+
+    // console.log(completed);
+
+    </script>
 
 </html>
