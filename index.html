@@ -3,10 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <title>Section 2: JavaScript Language Basics</title>
+        <style>
+
+        #delete {
+          background-color: red;
+        }
+
+          </style>
     </head>
 
     <body>
-        <h1>Section 2: JavaScript Language Basics</h1>
+        <h1>Todo</h1>
 
         <input type="text" name="FirstName" placeholder="task" id="textbox">
         <button id="add">Add task</button>
@@ -19,6 +26,8 @@
     </body>
 
     <script>
+
+
 
     const todos = [ 
       { 
@@ -35,26 +44,108 @@
       } 
     ];
 
-    document.querySelector('#add').addEventListener('click', paska);
 
-    function paska() {
-      var input = document.querySelector('#textbox').value
-      todos.push({title: input, completed: false})
-    }
+
+function renderlist() {
 
     todos.forEach(function(task) {
-      var li = document.createElement("LI");
-      var t = document.createTextNode(task.title);
-      li.appendChild(t);
+      const li = document.createElement("LI");
+      const titleText = document.createTextNode(task.title);
+      li.appendChild(titleText);
       document.querySelector("#todoList").appendChild(li);
+      const btn = document.createElement("button");
+
+      btn.onclick = function() {
+      console.log(titleText); // t
+      }
+
+      const delT = document.createTextNode("Delete");
+      btn.appendChild(delT);
+      li.appendChild(btn);
+
     });
 
+}
+
+
+    renderlist();
+
+    document.querySelector('#add').addEventListener('click', addToList);
     
+  function addToList() {
+    const input = document.querySelector('#textbox').value;
+    todos.push({title: input, completed: false })
+    document.querySelector('#todoList').innerHTML = "";
+
+   renderlist();
+
+  }
+  
+
     const completed = todos.filter(function(task) {
       return task.completed === true;
     });
 
-    // console.log(completed);
+    console.log(completed);
+
+//         window.onload = function() {
+// var taskList = [];                                          
+
+// var ul = document.getElementById("ulList");
+
+// // set focus on the text field
+// document.getElementById("toDoTask").focus();
+
+// // find the add id and onclick, go to function addTolist
+// document.getElementById("add").onclick = addToList;
+
+
+// /*
+//  *  Function that add tasks to the list and creates the list that appends to the ul element in the html
+//  *  Just alert an error if the user didnt add a task
+//  */
+
+// function addToList() {
+//     var task = document.getElementById("toDoTask").value;
+
+//     // check if user forgot to write a task
+//     if(task.length == 0){
+//         alert("You forgot to add a task");
+
+
+//     } 
+
+//     else {
+//         // add task to the taskList array
+//         taskList.push(task);  
+
+//         for(i =0; i < taskList.length; i++) {
+
+//             // create element li and add task to it
+//             var li = document.createElement('li');                         
+//             li.appendChild(document.createTextNode(taskList[i]));                                    
+//         }
+
+//         //append li to ul 
+
+//         ul.appendChild(li);
+
+//     }
+
+// }
+
+// /*
+//  * Complete the task by adding a class that change the color to green and add a line-through.
+//  * 
+//  */
+
+// function completeTask() {
+//     // set the default parent to li
+//     var li = this.parentNode;
+//     li.className = "line-through";
+// }
+// };
+
 
     </script>
 
